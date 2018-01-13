@@ -2,3 +2,4 @@
 target/
 countrytech.iml
 src/main/webapp/WEB-INF/classes
+src/main/java/org/heyear/tech/.DS_Store
