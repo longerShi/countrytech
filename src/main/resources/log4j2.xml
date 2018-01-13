@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- log4j会默认在src根目录下找log4j2.xml文件, 配置大小写敏感 -->
+<!-- TRACE<DEBUG<INFO<WARN<ERROR<FATAL -->
+<Configuration>
+    <!--先定义所有的appender -->
+    <Appenders>
+        <!--这个输出控制台的配置 -->
+        <!-- <Console name="console" target="SYSTEM_OUT">
+
+            日志过滤器，控制台只输出DEBUG及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %class{36} %L %M - %msg%xEx%n" />
+        </Console> -->
+
+        <!--所有error日志打印在这里 -->
+        <File name="error" fileName="/Users/shiwenlong/logs/tech/error.log">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+
+        <!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+        <RollingFile name="rollingFile" fileName="/Users/shiwenlong/logs/tech/tech.log"
+                     filePattern="/Users/shiwenlong/logs/tech/tech-%i.log.gz">
+
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />
+            <SizeBasedTriggeringPolicy size="20MB" />
+        </RollingFile>
+    </Appenders>
+
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+    <Loggers>
+        <!--建立一个默认的root的TRACE, 当上面的Appenders没有定义level时生效 -->
+        <Root level="TRACE">
+            <AppenderRef ref="rollingFile" />
+            <AppenderRef ref="console" />
+            <AppenderRef ref="error" />
+        </Root>
+    </Loggers>
+
+</Configuration>

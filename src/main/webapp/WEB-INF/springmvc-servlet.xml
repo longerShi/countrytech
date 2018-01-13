@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - DispatcherServlet application context for the dayup.org application. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+    <context:component-scan base-package="org.heyear.tech.controller" />
+
+    <!-- <mvc:annotation-driven /> -->
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <aop:aspectj-autoproxy />
+
+    <!-- <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/auth/**"/>
+            <bean class="org.heyear.mall.auth.AuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors> -->
+
+    <!-- <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/man/**"/>
+            <bean class="org.heyear.mall.auth.ManAuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors> -->
+
+    <!-- TODO 和上面的interceptors有冲突 有时间再研究, 现在解决方法是 在nginx配置跨域问题-->
+    <mvc:cors>
+        <mvc:mapping
+                path="/**"
+                allowed-methods="GET, PUT, POST, DELETE"/>
+    </mvc:cors>
+
+
+</beans>
