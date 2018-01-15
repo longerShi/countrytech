@@ -8,14 +8,20 @@ import org.heyear.framework.entity.BaseEntity;
  */
 public class TechInfo extends BaseEntity{
 
+    private String userId;
     private String techName;
-    private String phone;
-    private Integer sex;
-    private String headImg;
     private String address;
     private String techType;
     private Double longitude;
     private Double latitude;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getTechName() {
         return techName;
@@ -23,30 +29,6 @@ public class TechInfo extends BaseEntity{
 
     public void setTechName(String techName) {
         this.techName = techName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
     }
 
     public String getAddress() {

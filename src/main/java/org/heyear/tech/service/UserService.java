@@ -1,6 +1,7 @@
 package org.heyear.tech.service;
 
-import org.heyear.tech.dao.TechInfoDao;
+import org.heyear.tech.bean.TechUser;
+import org.heyear.tech.dao.UserDao;
 import org.heyear.tech.entity.TechInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,13 @@ import java.util.List;
  * @Date 2018/1/13
  */
 @Service
-public class TechInfoService {
+public class UserService {
 
     @Autowired
-    TechInfoDao techInfoDao;
+    UserDao userDao;
 
 
-    public List<TechInfo> getList() {
-        return techInfoDao.getList();
+    public List<TechUser> getTechUserList() {
+        return userDao.getTechUserList();
     }
 }
