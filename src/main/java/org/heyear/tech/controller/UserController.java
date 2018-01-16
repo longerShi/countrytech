@@ -25,9 +25,18 @@ public class UserController extends ApiBaseController {
 
     @RequestMapping(value = "/techs", method = RequestMethod.GET)
     @ResponseBody
-    public ApiResult getUserTech() {
+    public ApiResult getUserTechList() {
         List<TechUser> list = userService.getTechUserList();
         return new ApiResult("techUsers", list);
     }
+
+
+    @RequestMapping(value = "/techs/{techUserId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResult getUserTech(@PathVariable(value = "techUserId") String techUserId) {
+        TechUser techUser = userService.getTechUser(techUserId);
+        return new ApiResult("techUser", techUser);
+    }
+
 
 }

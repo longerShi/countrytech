@@ -2,7 +2,6 @@ package org.heyear.tech.service;
 
 import org.heyear.tech.bean.TechUser;
 import org.heyear.tech.dao.UserDao;
-import org.heyear.tech.entity.TechInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +21,9 @@ public class UserService {
     public List<TechUser> getTechUserList() {
         return userDao.getTechUserList();
     }
+
+    public TechUser getTechUser(String techUserId) {
+        return userDao.getTechUser(techUserId);
+    }
+
 }

@@ -7,6 +7,7 @@ import org.heyear.tech.entity.TechInfo;
 import org.heyear.tech.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.time.chrono.JapaneseDate;
 import java.util.List;
 
 /**
@@ -18,9 +19,15 @@ public class UserDao extends BaseDao<User>{
 
 
     public List<TechUser> getTechUserList() {
-        String sql = "select t1.id,t1.head_img,t2.tech_name,t2.tech_type,t2.address,t1.phone From t_user t1 " +
+        String sql = "select t2.id,t1.head_img,t2.tech_name,t2.tech_type,t2.address,t1.phone From t_user t1 " +
                 "INNER JOIN t_tech_info t2 on t1.id = t2.user_id";
         return jdbcOperations.query(sql, JdbcHelper.getRowMapper(TechUser.class));
+    }
+
+    public TechUser getTechUser(String techUserId) {
+        String sql = "select t2.id, t1.head_img,t2.tech_name,t2.tech_type, t2.address,t1.phone From t_user t1 " +
+                "INNER JOIN t_tech_info t2 on t1.id = t2.user_id where t2.id = ?";
+        return jdbcOperations.queryForObject(sql, JdbcHelper.getRowMapper(TechUser.class), techUserId);
     }
 
 }
